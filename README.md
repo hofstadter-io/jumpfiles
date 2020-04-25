@@ -2,6 +2,7 @@
 
 A pattern for self contained scripts which allow you to jump around linux and run common commands. The key is that it's easy to update and reload the file. 
 
+_Note, while these examples are mostly changing directories, you can do quite a bit more!_
 
 ### The J Jumpfile
 
@@ -23,29 +24,29 @@ function j () {
   ### The following 3 cases are key to the jump files UX
   ### quickly add, update, and reload new cases and ops.
   #
-  
+
   # Cat this jump file
   "?" | help           ) cat $J_JUMP_FILE_LOCATION ;;
-  
+
   # Edit this jump file
   E | edit             ) $JUMP_EDITOR $J_JUMP_FILE_LOCATION ;;
-  
+
   # Relaod this jump file
   R | RELOAD | reload  ) source $J_JUMP_FILE_LOCATION ;;
-  
-  
-  # Navigate to your jumpfils repo
+
+
+  # Navigate to your jumpfiles repo
   J | jump             ) cd $JDIR/.. ;;
 
-  
+
   #
   ### Copy me and add cases like you see in the other files
   ### Be sure to change the function name and add it to the index.sh
   #
 
-  
+
   # Print all other cases
-  *) 
+  *)
     echo "unknown jump '$1'"
     echo "use: 'j ?' for help"
     echo "or:  'j E' to edit"
