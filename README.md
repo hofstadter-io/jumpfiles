@@ -4,6 +4,8 @@ A pattern for self contained scripts which allow you to jump around linux and ru
 
 _Note, while these examples are mostly changing directories, you can do quite a bit more!_
 
+[Create your own private copy by clicking this link or the green "Use Template" button next to the clone button](https://github.com/hofstadter-io/jumpfiles/generate).
+
 ### The J Jumpfile
 
 This is the base jumpfile. It has 3 cases which make for a good UX.
