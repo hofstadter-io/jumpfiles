@@ -1,5 +1,5 @@
 JDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
+J_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 
 source $JDIR/../config.sh
 
@@ -8,9 +8,10 @@ function j () {
   shift 1
   case $ARG in
 
-  "?" | help           ) cat $JUMP_FILE_LOCATION ;;
-  E | edit             ) $JUMP_EDITOR $JUMP_FILE_LOCATION ;;
-  R | RELOAD | reload  ) source $JUMP_FILE_LOCATION ;;
+  "?" | help           ) cat $J_JUMP_FILE_LOCATION ;;
+  E | edit             ) $JUMP_EDITOR $J_JUMP_FILE_LOCATION ;;
+  R | RELOAD | reload  ) source $J_JUMP_FILE_LOCATION ;;
+  J | jump             ) cd $JDIR/.. ;;
 
   #
   #### Copy me and add cases like you see in the other files
@@ -19,9 +20,9 @@ function j () {
 
   *) 
     echo "unknown jump '$1'"
-    echo "use: 'c ?' for help"
-    echo "or:  'c E' to edit"
-    echo "and: 'c R' to reolaod"
+    echo "use: 'j ?' for help"
+    echo "or:  'j E' to edit"
+    echo "and: 'j R' to reolaod"
     ;;
   esac
 }

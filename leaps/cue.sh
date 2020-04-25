@@ -1,5 +1,5 @@
 JDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
+C_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 
 source $JDIR/../config.sh
 
@@ -11,9 +11,9 @@ function c () {
   shift 1
   case $ARG in
 
-  "?" | help             ) cat $JUMP_FILE_LOCATION ;;
-  E   | edit             ) $JUMP_EDITOR $JUMP_FILE_LOCATION ;;
-  R   | RELOAD | reload  ) source $JUMP_FILE_LOCATION ;;
+  "?" | help             ) cat $C_JUMP_FILE_LOCATION ;;
+  E   | edit             ) $JUMP_EDITOR $C_JUMP_FILE_LOCATION ;;
+  R   | RELOAD | reload  ) source $C_JUMP_FILE_LOCATION ;;
 
   # cue source
   B  | base | home  ) cd $CUEBASE  ;;
