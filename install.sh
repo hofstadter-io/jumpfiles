@@ -3,7 +3,7 @@ set -euo pipefail
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-INSTALL_LOC=${1:-$HOME/.bashrc}
+INSTALL_LOC=${1:-$HOME/.profile}
 JUMPFILE=$DIR/index.sh
 
 set +e
@@ -18,3 +18,6 @@ if [ $II_RET -ne 0 ]; then
   echo ". $JUMPFILE" >> $INSTALL_LOC
   echo "" >> $INSTALL_LOC
 fi
+
+# copy overlay
+cp -r $DIR/overlay/* $HOME

@@ -1,0 +1,23 @@
+# use the rest as arguments for "run"
+RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+# ...and turn them into do-nothing targets
+$(eval $(RUN_ARGS):;@:)
+
+# First command incase users forget to supply one
+# cat self as help for simplicity
+.PHONY: help
+help:
+	cat $$HOME/jumpfiles/assets/Makefile
+
+.PHONY: edit
+edit:
+	nvim $$HOME/jumpfiles/assets/Makefile
+
+.PHONY: hello
+hello:
+	@echo args: $(RUN_ARGS)
+
+.PHONY: cloc
+cloc:
+	cloc --read-lang-def=$$HOME/jumpfiles/assets/cloc_defs.txt --exclude-dir=cue.mod,vendor,node_models $(RUN_ARGS)
+

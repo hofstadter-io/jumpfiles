@@ -3,8 +3,7 @@ C_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 
 source $JDIR/../config.sh
 
-CUEBASE=$HOME/hof/cuelang
-CUEMODS=$HOME/hof/hofio/cuemods
+CUEBASE=$HOME/cue
 
 function c () {
   ARG=$1
@@ -16,20 +15,17 @@ function c () {
   R   | RELOAD | reload  ) source $C_JUMP_FILE_LOCATION ;;
 
   # cue source
-  B  | base | home  ) cd $CUEBASE  ;;
-  S  | src  | cue   ) cd $CUEBASE/cue  ;;
-  T  | tmp          ) cd $CUEBASE/tmp  ;;
+  b  | base | home  ) cd $CUEBASE  ;;
+  c  | cue          ) cd $CUEBASE/cue  ;;
+  s  | src          ) cd $CUEBASE/cue  ;;
+  t  | tmp          ) cd $CUEBASE/tmp  ;;
   C  | cmd          ) cd $CUEBASE/cue/cmd/cue ;;
-  W  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
+  w  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
   ex | examples     ) cd $CUEBASE/examples  ;;
 
-  # cuelibs
-  m | mod |mods         ) cd $CUEMODS/$@;;
-  M | model             ) cd $CUEMODS/model  ;;
-  L | lib | cuelib      ) cd $CUEMODS/cuelib  ;;
-  t   | T | test | TEST ) cd $CUEMODS/cuetest ;;
-  st  | struct          ) cd $CUEMODS/structural ;;
-
+  v  | vim          ) cd $HOME/.EverVim/bundle/cue.vim  ;;
+  V  | VIM          ) cd $CUEBASE/cue.vim  ;;
+  j  | jjo          ) cd $CUEBASE/jjo-vim-cue  ;;
 
   *) 
     echo "unknown jump '$1'"
