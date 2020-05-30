@@ -8,7 +8,7 @@ HOFTOOLS=$HOFBASE/tools
 HOFMODS=$HOFBASE/mods
 HOFPLAT=$HOFBASE/studios/old-platform
 
-function h () {
+function h_orig () {
   ARG=$1
   shift 1
   case $ARG in
@@ -17,8 +17,12 @@ function h () {
   E | edit             ) $JUMP_EDITOR $H_JUMP_FILE_LOCATION ;;
   R | RELOAD | reload  ) source $H_JUMP_FILE_LOCATION ;;
 
+  # Jump to hof leaps
+  J ) cd $HOFBASE/jumpfiles ;;
+
   # base
   H | B | base | home  ) cd $HOME/hof/$@  ;;
+
 
   # Documentation
   d  | docs | site ) cd $HOME/hof/websites/site ;;
@@ -65,7 +69,8 @@ function h () {
   esac
 
 }
-
+export -f h_orig
+alias h="h_base"
 
 alias hg="hof gen"
 alias hmv="hof mod vendor"
@@ -170,8 +175,6 @@ alias _HR="_Hg && _Hi"
 alias _HB="_Hv && _Hg && _Hb"
 alias _HI="_Hv && _Hg && _Hi"
 alias _H="pushd $HOFBASE/hof; hof mod vendor && hof gen && _Hi; popd"
-
-alias H="hof mod vendor cue && hof gen"
 
 function LKC () {
     kind create cluster --name ${1:-hof-kind}

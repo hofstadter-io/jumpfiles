@@ -1,10 +1,17 @@
-# jumpfiles
+# jumpfiles - get more done in fewer keystrokes
 
-A pattern for self contained scripts which allow you to jump around linux and run common commands. The key is that it's easy to update and reload the file. 
 
-_Note, while these examples are mostly changing directories, you can do quite a bit more!_
+### Features
 
-[Create your own private copy by clicking this link or the green "Use Template" button next to the clone button](https://github.com/hofstadter-io/jumpfiles/generate).
+- quickly create, refresh, and run terminal "shortcuts" for common commands
+- jump around the filesystem, run a command from anywhere^2, chain them together
+- builtin Jumpfiles
+    - `j`: the baseline jumpfile. `j J` will jump you to this repository on your system
+    - `c`: common cue commands and many directory jumps for cue dev work
+    - `h`: jumpfile for the `hof` tool with many extras
+    - `g`: gcloud jumpfile, largely for managing account context. Really helpful for contractors and those who are in many GCP accounts on a daily basis.
+    - `d`: or `devenv` is an advanced jumpfile (and supporting cue code) for ephemeral Kubernetes clusters and cloud vm development environments. Quickly spinup, provisions addons, and work with multiple k8s / dev vms.
+- powered by https://cuelang.org for type safe scripting and importable modules and ecosystem
 
 ### The J Jumpfile
 
@@ -41,10 +48,6 @@ function j () {
   J | jump             ) cd $JDIR/.. ;;
 
 
-  #
-  ### Copy me and add cases like you see in the other files
-  ### Be sure to change the function name and add it to the index.sh
-  #
 
 
   # Print all other cases
@@ -58,50 +61,25 @@ function j () {
 }
 ```
 
-### The C (for Cuelang) Jumpfile
+### Installation
 
-This one is based on a dev setup for [Cuelang](https://cuelang.org)
+1. Clone repository
+2. Run install
+3. Setup custom
 
 ```
-JDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-C_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 
-source $JDIR/../config.sh
+```
 
-CUEBASE=$HOME/hof/cuelang
-CUEMODS=$HOME/hof/hofio/cuemods
+### Examples
 
-function c () {
-  ARG=$1
-  shift 1
-  case $ARG in
+Create an ephemeral development environment:
 
-  "?" | help             ) cat $C_JUMP_FILE_LOCATION ;;
-  E   | edit             ) $JUMP_EDITOR $C_JUMP_FILE_LOCATION ;;
-  R   | RELOAD | reload  ) source $C_JUMP_FILE_LOCATION ;;
+```
+# GKE, single node, 4CPU
+devenv start -t gcp -t k8s -t md -t name=my-k8s-devenv
+devenv creds -t name=my-k8s-devenv
+devenv list
+devenv destroy -t name=my-k8s-devenv
 
-  # cue source
-  B  | base | home  ) cd $CUEBASE  ;;
-  S  | src  | cue   ) cd $CUEBASE/cue  ;;
-  T  | tmp          ) cd $CUEBASE/tmp  ;;
-  C  | cmd          ) cd $CUEBASE/cue/cmd/cue ;;
-  W  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
-  ex | examples     ) cd $CUEBASE/examples  ;;
-
-  # cuelibs
-  m | mod |mods         ) cd $CUEMODS/$@;;
-  M | model             ) cd $CUEMODS/model  ;;
-  L | lib | cuelib      ) cd $CUEMODS/cuelib  ;;
-  t   | T | test | TEST ) cd $CUEMODS/cuetest ;;
-  st  | struct          ) cd $CUEMODS/structural ;;
-
-
-  *) 
-    echo "unknown jump '$1'"
-    echo "use: 'c ?' for help"
-    echo "or:  'c E' to edit"
-    echo "and: 'c R' to reolaod"
-    ;;
-  esac
-}
 ```

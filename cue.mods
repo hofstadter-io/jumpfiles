@@ -1,0 +1,3 @@
+module github.com/hofstadter-io/jumpfiles
+
+cue v0.2.0

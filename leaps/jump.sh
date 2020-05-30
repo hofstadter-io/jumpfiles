@@ -12,7 +12,8 @@ J_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 
 
 # Our main "jumpfile" or leap, the one letter command to get stuff done
-function j () {
+# We actually use a longer name here and alias later so you can override it
+function j_orig () {
 # Grab the first arg, then shift and switch
 # TODO, consider adding getops here too
   ARG=$1
@@ -33,6 +34,7 @@ function j () {
   # jump to the source directory (repo root on your system)
   J | jump             ) cd $JDIR/.. ;;
 
+  foo ) echo "bar" ;;
   #
   #####  This is a starter template for other leap files, see them for examples of what to put here
   #
@@ -45,6 +47,8 @@ function j () {
     ;;
   esac
 }
+export -f j_orig
+alias j="j_orig"
 
 function jump-save () {
     suffix=$(date +"%Y-%m-%d-%H%M")

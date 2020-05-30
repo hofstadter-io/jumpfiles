@@ -40,8 +40,7 @@ leaps=(
   gcloud
 
   # Developer ephemeral environments
-  devbox
-  devk8s
+  devenv
 )
 
 for leap in ${leaps[@]}; do

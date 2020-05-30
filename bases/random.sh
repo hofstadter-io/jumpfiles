@@ -1,3 +1,5 @@
+HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 function u() {
   N=${1:-1}
   shift 1
@@ -41,8 +43,7 @@ function clean-vim () {
     rm -rf $HOME/.vimswap $HOME/.vimbackup
 }
 
-alias cloc="cloc --read-lang-def=$HOME/jumpfiles/assets/cloc_defs.txt  --exclude-dir=cue.mod,vendor,node_modules"
-alias gmake="make -f $HOME/jumpfiles/assets/Makefile"
+alias cloc="cloc --read-lang-def=$HERE/../assets/cloc_defs.txt  --exclude-dir=cue.mod,vendor,node_modules"
 
 function fclip() {
     cat $1 | xclip -sel clip
