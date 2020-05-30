@@ -907,8 +907,5 @@
 
   ull = pull
   ush = push
-[user]
-	email = verdverm@gmail.com
-	name = Tony Worm
 [push]
 	default = simple

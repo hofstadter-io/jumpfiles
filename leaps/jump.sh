@@ -34,7 +34,6 @@ function j_orig () {
   # jump to the source directory (repo root on your system)
   J | jump             ) cd $JDIR/.. ;;
 
-  foo ) echo "bar" ;;
   #
   #####  This is a starter template for other leap files, see them for examples of what to put here
   #
