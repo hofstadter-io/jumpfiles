@@ -1,14 +1,7 @@
 package cloud
 
-#GCP_Context: {
-	Account: string
-	Project: string
-	Region: string
-	Zone: string
-	...
-}
-
-#GCP_Common: #GCP_Context & {
+// Common settings for GCloud inherited by all devenvs
+#GoogleConfig: #CommonConfig & {
 	Scopes: [...string] | *[
 		"devstorage.read_only",
 		"logging.write",

@@ -50,3 +50,10 @@ function fclip() {
 }
 
 alias rl="fc -s"
+
+function ping-godoc() {
+    project=$1
+    version=$2
+
+    curl https://proxy.golang.org/${project}/@v/${version}.info
+}

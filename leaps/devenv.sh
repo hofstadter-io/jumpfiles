@@ -40,6 +40,15 @@ function devenv () {
     devenv_jump cue cmd $@ view
     ;;
 
+  login | ssh )
+    # This one is special because we need interactive input
+    pushd $DEVENV_BASE > /devnull
+    CMD=$(cue cmd $@ login | tr -d "\\")
+    echo $CMD
+    $CMD
+    popd > /devnull
+    ;;
+
   creds )
     devenv_jump cue cmd $@ creds
     ;;
@@ -50,6 +59,14 @@ function devenv () {
 
   stop | delete | del )
     devenv_jump cue cmd $@ stop
+    ;;
+
+  setup | prep )
+    devenv_jump cue cmd $@ setup
+    ;;
+
+  platform | install )
+    devenv_jump cue cmd $@ platform
     ;;
 
   *) 

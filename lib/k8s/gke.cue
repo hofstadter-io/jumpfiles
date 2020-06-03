@@ -2,9 +2,37 @@ package k8s
 
 import(
 	"encoding/yaml"
-
 	"text/template"
 )
+
+#GKE_Scripts: {
+	config: _
+
+	info: (#GKE_Info & { Config: config })
+	view: (#GKE_View & { Config: config })
+
+	start: (#GKE_Start & { Config: config })
+	stop:  (#GKE_Stop  & { Config: config })
+
+	creds: (#GKE_Creds & { Config: config })
+	setup: (#GKE_Setup & { Config: config })
+
+	...
+}
+
+// temp mapping, to go away
+#GKE_Mappings: {
+	vmsize: {
+		xs:   "n1-standard-1"
+		sm:   "n1-standard-2"
+		md:   "n1-standard-4"
+		lg:   "n1-standard-8"
+		xl:   "n1-standard-16"
+		xxl:  "n1-standard-32"
+		xxxl: "n1-standard-64"
+	}	
+
+}
 
 // Mainly for cluster create
 #GKE_Config: {
@@ -24,7 +52,7 @@ import(
 	GkeReleaseChannel: *"regular" | "rapid" | "stable"
 	GkeImageType: string | *"COS"
 
-	defaultVmSize: string | *"\(#GCP_Mappings.vmsize[size])"
+	defaultVmSize: string | *"\(#GKE_Mappings.vmsize[size])"
 	MachineSize: string | *"\(defaultVmSize)"
 
 	DiskType: string
@@ -49,34 +77,9 @@ import(
 
 // This is mainly used to make sure we have a complete value going into the others
 // as so that we can inspect the values (change name of def here?)
-#GCP_Info: {
+#GKE_Info: {
 	Config: #GKE_Config
 	Script: yaml.Marshal(Config)
-}
-
-#GCP_List: {
-	Config: #GKE_Config
-
-	Script: template.Execute(Template, Config)
-
-	Template: ##"""
-	echo "CLUSTERS"
-	echo "==========="
-
-	gcloud container clusters list \
-		--account {{ .Account }} \
-		--project {{ .Project }} \
-		--filter="labels.jumpfile=('devk8s')" 2> /dev/null
-
-	echo
-	echo "DEV VMS"
-	echo "==========="
-	gcloud compute instances list \
-		--account {{ .Account }} \
-		--project {{ .Project }} \
-		--filter="labels.jumpfile=('devbox')" 2> /dev/null
-
-	"""##
 }
 
 #GKE_View: {
@@ -92,45 +95,19 @@ import(
 	"""##
 }
 
-#GKE_Creds: {
+#GKE_Start: {
 	Config: #GKE_Config
 
 	Script: template.Execute(Template, Config)
 
 	Template: ##"""
-	gcloud container clusters get-credentials {{ .fullname }} \
+	gcloud beta container \
 		--account {{ .Account }} \
 		--project {{ .Project }} \
+		clusters create {{ .fullname }} \
 		--zone {{ .Zone }} \
-		--quiet
-	"""##
-}
-
-#GKE_Teardown: {
-	Config: #GKE_Config
-
-	Script: template.Execute(Template, Config)
-
-	Template: ##"""
-	gcloud container clusters delete {{ .fullname }} \
-		--account {{ .Account }} \
-		--project {{ .Project }} \
-		--zone {{ .Zone }} \
-		--quiet
-	"""##
-}
-
-#GKE_Setup: {
-	Config: #GKE_Config
-
-	Script: template.Execute(Template, Config)
-
-	Template: ##"""
-	echo gcloud beta container \
-		--account {{ .Account }} \
-		--project {{ .Project }} \
-		clusters create "{{ .fullname }}" \
-		--zone {{ .Zone }} \
+		--tags {{ .Tags }} \
+		--labels {{ .LabelsJoined }} \
 		--no-enable-basic-auth \
 		--release-channel "{{ .GkeReleaseChannel }}" \
 		--image-type "{{ .GkeImageType }}" \
@@ -152,15 +129,54 @@ import(
 
 }
 
-#GCP_Mappings: {
-	vmsize: {
-		xs:   "n1-standard-1"
-		sm:   "n1-standard-2"
-		md:   "n1-standard-4"
-		lg:   "n1-standard-8"
-		xl:   "n1-standard-16"
-		xxl:  "n1-standard-32"
-		xxxl: "n1-standard-64"
-	}	
+#GKE_Stop: {
+	Config: #GKE_Config
 
+	Script: template.Execute(Template, Config)
+
+	Template: ##"""
+	gcloud container clusters delete {{ .fullname }} \
+		--account {{ .Account }} \
+		--project {{ .Project }} \
+		--zone {{ .Zone }} \
+		--quiet
+	"""##
 }
+
+#GKE_Creds: {
+	Config: #GKE_Config
+
+	Script: template.Execute(Template, Config)
+
+	Template: ##"""
+	gcloud container clusters get-credentials {{ .fullname }} \
+		--account {{ .Account }} \
+		--project {{ .Project }} \
+		--zone {{ .Zone }} \
+		--quiet
+	"""##
+}
+
+// setup cluster with extras
+#GKE_Setup: {
+	Config: #GKE_Config
+
+	Script: template.Execute(Template, Config)
+
+	Template: ##"""
+	echo "Not implemented yet..."
+	"""##
+}
+
+
+#GKE_Login: {
+	Config: #GKE_Config
+
+	Script: template.Execute(Template, Config)
+
+	Template: ##"""
+	echo "Login not implemented for clusters"
+	"""##
+}
+
+

@@ -72,7 +72,6 @@ function h_orig () {
 export -f h_orig
 alias h="h_base"
 
-alias hg="hof gen"
 alias hmv="hof mod vendor"
 alias hmvc="hof mod vendor cue"
 
@@ -176,13 +175,10 @@ alias _HB="_Hv && _Hg && _Hb"
 alias _HI="_Hv && _Hg && _Hi"
 alias _H="pushd $HOFBASE/hof; hof mod vendor && hof gen && _Hi; popd"
 
-function LKC () {
-    kind create cluster --name ${1:-hof-kind}
-}
-export -f LKC
-
-function LKD () {
-    kind delete cluster --name ${1:-hof-kind}
-}
-export -f LKD
-
+# testing related
+alias _Hgt="go test"
+alias _Hgtr="go test ./..."
+# testsuite helper when preserving cached test directories
+alias _Hts="rm -rf /no-home && rm -rf .workdir && go test"
+alias _Htst="rm -rf /no-home && rm -rf .workdir && go test -run Tests"
+alias _Htsb="rm -rf /no-home && rm -rf .workdir && go test -run Bugs"

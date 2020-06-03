@@ -1,27 +1,27 @@
-package k8s
+package vm
 
 import (
 	"github.com/hofstadter-io/jumpfiles/cuefig/cloud"
 )
 
-// Common settings inherited by all AKS clusters
-#AKS_Common: cloud.#AzureConfig & {
+// Common settings inherited by all Azure instances
+#AVM_Common: cloud.#AzureConfig & {
 	Labels: {
-		devenv: "k8s"
+		devenv: "vm"
 		...
 	}
 
 	// Network tags
-	Tags: "devk8s"
+	Tags: "devbox"
 
 	...
 }
 
-// AKS_Configs is a map into the sizing options
+// AVM_Configs is a map into the sizing options
 // This definition is unified with the following (3) definitions
-// - EKS_Common (above)
+// - AVM_Common (above)
 // - AzureConfig (../cloud/azure.cue)
-#AKS_Configs: [Name=string]: #AKS_Common & {
+#AVM_Configs: [Name=string]: #AVM_Common & { 
 	size: Name
 	Labels: {
 		size: Name
@@ -30,7 +30,7 @@ import (
 	...
 }
 
-#AKS_Configs: {
+#AVM_Configs: {
 
 	xs: {
 		...
@@ -52,13 +52,6 @@ import (
 		...
 	}
 
-	xxl: {
-		...
-	}
-
-	xxxl: {
-		...
-	}
-
 	...
 }
+
