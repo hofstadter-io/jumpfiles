@@ -66,7 +66,7 @@ function j_orig () {
     echo "unknown jump '$1'"
     echo "use: 'j ?' for help"
     echo "or:  'j E' to edit"
-    echo "and: 'j R' to reolaod"
+    echo "and: 'j R' to reload"
     ;;
   esac
 }
