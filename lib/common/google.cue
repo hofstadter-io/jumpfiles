@@ -18,7 +18,7 @@ import (
 	gcloud container clusters list \
 		--account {{ .Account }} \
 		--project {{ .Project }} \
-		--filter="labels.jumpfile=('devk8s')"
+		--filter="labels.devenv=('k8s')"
 
 	echo
 	echo "DEV VMS"
@@ -26,7 +26,7 @@ import (
 	gcloud compute instances list \
 		--account {{ .Account }} \
 		--project {{ .Project }} \
-		--filter="labels.jumpfile=('devbox')"
+		--filter="labels.devenv=('vm')"
 
 	"""##
 }

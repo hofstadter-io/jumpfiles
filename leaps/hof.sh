@@ -59,6 +59,12 @@ function h_orig () {
   k8s            ) cd $HOFMODS/k8s ;;
   devops         ) cd $HOFMODS/devops ;;
 
+  T )
+    pushd $HOFBASE/hof/ci/test > /dev/null
+    cue cmd $@ run-tests
+    popd > /dev/null
+    ;;
+
   # Finally catch anything we don't know
   *) 
     echo "unknown jump '$1'"
