@@ -5,21 +5,6 @@ import(
 	"text/template"
 )
 
-#GKE_Scripts: {
-	config: _
-
-	info: (#GKE_Info & { Config: config })
-	view: (#GKE_View & { Config: config })
-
-	start: (#GKE_Start & { Config: config })
-	stop:  (#GKE_Stop  & { Config: config })
-
-	creds: (#GKE_Creds & { Config: config })
-	setup: (#GKE_Setup & { Config: config })
-
-	...
-}
-
 // temp mapping, to go away
 #GKE_Mappings: {
 	vmsize: {
@@ -49,9 +34,18 @@ import(
 	MaxPodsPerNode: int & >32 | *110
 
 	//GkeVersion: string
-	GkeReleaseChannel: *"regular" | "rapid" | "stable"
-	GkeImageType: string | *"COS"
+	GkeReleaseChannel?: "regular" | "rapid" | "stable"
+	GkeKubernetesVersion?: string
+	GkeVersionFlag: string
 
+	if GkeKubernetesVersion != _|_ {
+		GkeVersionFlag: "--cluster-version \(GkeKubernetesVersion)"
+	}
+	if GkeKubernetesVersion == _|_ {
+		GkeVersionFlag: string | *"--release-channel \(GkeReleaseChannel)"
+	}
+
+	GkeImageType: string | *"COS"
 	defaultVmSize: string | *"\(#GKE_Mappings.vmsize[size])"
 	MachineSize: string | *"\(defaultVmSize)"
 
@@ -80,6 +74,7 @@ import(
 #GKE_Info: {
 	Config: #GKE_Config
 	Script: yaml.Marshal(Config)
+	...
 }
 
 #GKE_View: {
@@ -93,6 +88,7 @@ import(
 		--project {{ .Project }} \
 		--zone {{ .Zone }}
 	"""##
+	...
 }
 
 #GKE_Start: {
@@ -108,8 +104,8 @@ import(
 		--zone {{ .Zone }} \
 		--tags {{ .Tags }} \
 		--labels {{ .LabelsJoined }} \
+		{{ .GkeVersionFlag }} \
 		--no-enable-basic-auth \
-		--release-channel "{{ .GkeReleaseChannel }}" \
 		--image-type "{{ .GkeImageType }}" \
 		--num-nodes "{{ .NumNodes }}" \
 		--machine-type "{{ .MachineSize }}" \
@@ -127,6 +123,7 @@ import(
 		{{ .Extra }}
 	"""##
 
+	...
 }
 
 #GKE_Stop: {
@@ -141,6 +138,7 @@ import(
 		--zone {{ .Zone }} \
 		--quiet
 	"""##
+	...
 }
 
 #GKE_Creds: {
@@ -155,6 +153,7 @@ import(
 		--zone {{ .Zone }} \
 		--quiet
 	"""##
+	...
 }
 
 // setup cluster with extras
@@ -166,6 +165,7 @@ import(
 	Template: ##"""
 	echo "Not implemented yet..."
 	"""##
+	...
 }
 
 
@@ -177,6 +177,7 @@ import(
 	Template: ##"""
 	echo "Login not implemented for clusters"
 	"""##
+	...
 }
 
 

@@ -4,9 +4,9 @@ DEVENV_JUMP_FILE_LOCATION="${BASH_SOURCE[0]}"
 DEVENV_BASE=$JDIR/../lib
 
 function devenv_jump () {
-    pushd $DEVENV_BASE > /devnull
+    pushd $DEVENV_BASE > /dev/null
     $@
-    popd > /devnull
+    popd > /dev/null
 }
 
 alias d="devenv"
@@ -21,7 +21,7 @@ function devenv () {
   R   | RELOAD | reload  ) source $DEVENV_JUMP_FILE_LOCATION ;;
 
   flags )
-    devenv_jump cue eval -A --out=cue -e "#Schema" $@ 
+    devenv_jump cue eval -A --out=cue -e "#DevenvFlagDefs" $@ 
     ;;
 
   peek )
@@ -53,20 +53,27 @@ function devenv () {
     devenv_jump cue cmd $@ creds
     ;;
 
-  start | new | boot )
+  C | create | new | start )
     devenv_jump cue cmd $@ start
     ;;
 
-  stop | delete | del )
+  D | stop | delete | del )
     devenv_jump cue cmd $@ stop
     ;;
 
-  setup | prep )
+  S | setup | prep )
     devenv_jump cue cmd $@ setup
     ;;
 
-  platform | install )
+  P | platform | install )
     devenv_jump cue cmd $@ platform
+    ;;
+
+  L | launch | boot )
+    devenv create $@
+    echo "wait just a few seconds..."
+    sleep 15
+    devenv setup $@
     ;;
 
   *) 

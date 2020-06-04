@@ -15,7 +15,7 @@ package env
 	}
 
 	envs: {
-		google: [string]: accounts.google & {
+		google: {
 			iso: {
 				Project: "google-project-id"
 				Network: "default"

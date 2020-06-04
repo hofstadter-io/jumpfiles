@@ -8,18 +8,6 @@ import (
 //   cue def -t key=val -t short set > my-config.cue
 //   cmd def -t gcp -t vm -t name=douglas set
 #DevenvSchema: {
-	// Flags
-	Shortname: string @tag(shortname)
-	Name:      string @tag(name)
-
-	acct:      string @tag(acct) @label(key,key2)
-	proj:      string @tag(proj)
-	env:       string @tag(env,short=iso|dev|stg|prd)
-	cloud:     string @tag(cloud,short=gcp|azure|aws)
-	size:      string @tag(size,short=xs|sm|md|lg|xl|xxl|xxxl)
-	runtime:   string @tag(runtime,short=k8s|vm)
-	// used to run a single setup script
-	setup:   string @tag(setup)
 
 	// trim the prefix from the email address (Account)
 	Account: string
@@ -30,7 +18,7 @@ import (
 
 	// used to index into some config tables
 	acct:      string
-	env:      string | *"iso"
+	env:      string | *"dev"
 	cloud:    "google" | "azure" | "amazon"
 	runtime:  "k8s" | "vm"
 	size:     "xs" | "sm" | "md" | "lg" | "xl"| "xxl" | "xxxl"
@@ -52,7 +40,7 @@ import (
 #DevenvLookupTable: {
 	// The main table from the devenv_grid.cue file
 	// This will also have the flags values too
-	Cfg: #DevenvDefaults & #DevenvSchema
+	Cfg: #DevenvDefaults
 
 	// Progressively index into the config tree
 	// TODO, turn this into tags / guards based ?
@@ -71,7 +59,7 @@ import (
 	// Script lookup
 	ScriptRoot:    #DevenvScriptTable
 	ScriptCloud:   ScriptRoot[Cfg.cloud]
-	ScriptRuntime: ScriptCloud[Cfg.runtime]
+	ScriptRuntime: ScriptCloud[Cfg.runtime] & { config: Cfg }
 
 	// These are our final values
 	Context: ContextAcct & ContextEnv
@@ -84,4 +72,4 @@ import (
 #DevenvActual: #DevenvLookupTable.Context
 #DevenvActual: #DevenvLookupTable.Config
 
-#DevenvScripts: (#DevenvLookupTable.Scripts & { config: #DevenvActual })
+#DevenvScripts: #DevenvLookupTable.Scripts & { config: #DevenvActual }

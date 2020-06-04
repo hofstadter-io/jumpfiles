@@ -18,7 +18,8 @@ import (
 	gcloud container clusters list \
 		--account {{ .Account }} \
 		--project {{ .Project }} \
-		--filter="labels.devenv=('k8s')"
+		--filter="resourceLabels.devenv=('k8s')" \
+		2> /dev/null
 
 	echo
 	echo "DEV VMS"

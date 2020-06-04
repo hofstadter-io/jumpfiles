@@ -6,22 +6,6 @@ import(
 	"text/template"
 )
 
-#GCP_Scripts: {
-	config: _
-
-	info: (#GCP_Info & { Config: config })
-	view: (#GCP_View & { Config: config })
-
-	start: (#GCP_Start & { Config: config })
-	stop:  (#GCP_Stop  & { Config: config })
-
-	login: (#GCP_Login & { Config: config })
-	creds: (#GCP_Creds & { Config: config })
-	setup: (#GCP_Setup & { Config: config })
-
-	...
-}
-
 // temp mapping, to go away
 #GCP_Mappings: {
 	vmsize: {
@@ -65,7 +49,9 @@ import(
 // as so that we can inspect the values (change name of def here?)
 #GCP_Info: {
 	Config: #GCP_Config
-	Script: yaml.Marshal(Config)
+	Script: """
+	\(yaml.Marshal(Config))
+	"""
 }
 
 #GCP_View: {
