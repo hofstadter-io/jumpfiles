@@ -194,3 +194,24 @@ login | ssh )
 ```
 
 
+### Make money contributing to Hofstadter repositories
+
+Our own heart and start is in open source and we can now give back
+to others who might follow a similar path.
+We want to support the freelance, open source developer community
+so we have made several bounties available on this repository.
+
+Please have a look at the issues.
+If you find something of interest and want to work on earning the bounty:
+
+- comment on the issue, chat with us on gitter, or send us an email.
+- we'll expand the description, come to an agreement about the scope, and assign an appropriate reward
+- the bounties you see are estimates and are up for both negotiation and competitive bidding, on a case-by-case basis
+- once agreement is reached, we will make this formal with a contract and payment method setup
+
+_Please talk to us before beginning work. We will consider but make no
+commitment to make payment for work that was not corrdinated and formalized._
+
+Also, if you find something you'd like to work on in another repository,
+or one that does not exist yet, we're all about it, so get in touch!
+
