@@ -1,10 +1,37 @@
 # jumpfiles - get more done in fewer keystrokes
 
+[![Version](https://img.shields.io/github/v/tag/hofstadter-io/jumpfiles)](https://github.com/hofstadter-io/jumpfiles/tags)
+[![Bounties](https://img.shields.io/github/issues/hofstadter-io/jumpfiles/bounty)]](https://github.com/hofstadter-io/jumpfiles/issues?q=is%3Aissue+is%3Aopen+label%3Abounty)
+[![Gitter](https://img.shields.io/gitter/room/hofstadter/hof)](https://gitter.im/hofstadter-io)
+
+Jumpfiles are a set of Bash and Cue files loaded into your shell.
+They provide you with "quick key" commands for common patterns and sequences.
+While originally this was for moving around a filesystem,
+we have found ourselves using this for far more complex task
+like managing ephemeral development environments.
+
+Two important design considerations in Jumpfiles are:
+
+1. It should be easy to capture, preserve, and start using "quick keys" for common tasks
+2. The tool should understand the context of the command and and provide easy runtime switches on named defaults
+
+The overall goal is to help developers have
+a consistent and highly productive workspace
+(and pretty sweet if we may say so).
+We are largely Kubernetes based, so expect a lot of awesomeness around that.
 
 ### Features
 
-- quickly create, refresh, and run terminal "shortcuts" for common commands
-- jump around the filesystem, run a command from anywhere^2, chain them together
+- quickly create, refresh, and run terminal "quick keys" for common commands, patterns, and sequiences
+- `leaps` helps you jump around the filesystem, run a command from anywhere, and chain them together
+- keep yourself safer and only expose secret environment variables when a command is run and needs them
+- `devenv` helps you launch ephemeral development environments on VMs or Kubernetes
+- create sharable, named configurations. `devenv` merges three configuration sets to understand your context
+    - `auth` - cloud and project configuration, especially useful for working with multiple accounts across many clouds and projects
+    - `runtime` - captures the commonalities and differences from `cloud -> k8s/vm -> named setup` to provide the consistent environment across cloud platforms
+    - `scripts` - enables the behavior, or implements the commands. These also capture overlap and differences in the way these things need to happen
+    - `devenv` - commands inspect the flags and defaults to construct a context for a call
+    - `custom` - all of the above is customizable and can plug into the hof jumpfile installation so you can add your personal touch while still benefiting from upstream changes
 - builtin Jumpfiles
     - `j`: the baseline jumpfile. `j J` will jump you to this repository on your system
     - `c`: common cue commands and many directory jumps for cue dev work
