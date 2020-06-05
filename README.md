@@ -6,26 +6,24 @@
 
 Jumpfiles are a set of Bash and Cue files loaded into your shell.
 They provide you with "quick key" commands for common patterns and sequences.
-While originally this was for moving around a filesystem,
-we have found ourselves using this for far more complex task
-like managing ephemeral development environments.
+While originally used for moving around a filesystem,
+we have found ourselves using this for far more complex tasks
+like building a tool from anywhere or managing ephemeral kubernetes environments.
 
 Two important design considerations in Jumpfiles are:
 
-1. It should be easy to capture, preserve, and start using "quick keys" for common tasks
-2. The tool should understand the context of the command and and provide easy runtime switches on named defaults
+1. It should be easy to capture, preserve, share, and start using "quick keys" for common tasks
+2. The tool should understand the context of your command and provide switches on top of named defaults
 
-The overall goal is to help developers have
-a consistent and highly productive workspace
-(and pretty sweet if we may say so).
+The overall goal is to help developers leverage and maintain consistent and highly productive workspaces.
 We are largely Kubernetes based, so expect a lot of awesomeness around that.
 
 ### Features
 
 - quickly create, refresh, and run terminal "quick keys" for common commands, patterns, and sequiences
 - `leaps` helps you jump around the filesystem, run a command from anywhere, and chain them together
-- keep yourself safer and only expose secret environment variables when a command is run and needs them
 - `devenv` helps you launch ephemeral development environments on VMs or Kubernetes
+- keep yourself safer and only expose secret environment variables when a command is run and needs them, good for non-sensative context values as well
 - create sharable, named configurations. `devenv` merges three configuration sets to understand your context
     - `auth` - cloud and project configuration, especially useful for working with multiple accounts across many clouds and projects
     - `runtime` - captures the commonalities and differences from `cloud -> k8s/vm -> named setup` to provide the consistent environment across cloud platforms
@@ -36,9 +34,10 @@ We are largely Kubernetes based, so expect a lot of awesomeness around that.
     - `j`: the baseline jumpfile. `j J` will jump you to this repository on your system
     - `c`: common cue commands and many directory jumps for cue dev work
     - `h`: jumpfile for the `hof` tool with many extras
-    - `g`: gcloud jumpfile, largely for managing account context. Really helpful for contractors and those who are in many GCP accounts on a daily basis.
-    - `d`: or `devenv` is an advanced jumpfile (and supporting cue code) for ephemeral Kubernetes clusters and cloud vm development environments. Quickly spinup, provisions addons, and work with multiple k8s / dev vms.
-- powered by https://cuelang.org for type safe scripting and importable modules and ecosystem
+    - `g`: gcloud jumpfile, largely for managing account context. Really helpful for contractors and those who are in many GCP accounts on a daily basis
+    - `d`: or `devenv` is an advanced jumpfile (and supporting cue code) for ephemeral Kubernetes clusters and cloud vm development environments
+
+Powered by https://cuelang.org for type safe scripting and the importable modules and growing ecosystem.
 
 ### The J Jumpfile
 
