@@ -37,6 +37,12 @@ import(
 	ImageProject: string | *"debian-cloud"
 	ImageFamily: string | *"debian-10"
 
+	Public: bool | *true
+	noAddress: string | *""
+	if Public == false {
+		noAddress: "--no-address"
+	}
+
 	DiskType: string
 	DiskSize: string
 
@@ -84,6 +90,7 @@ import(
 		--machine-type "{{ .MachineSize }}" \
 		--boot-disk-type "{{ .DiskType }}" \
 		--boot-disk-size "{{ .DiskSize }}" \
+		{{ .noAddress }} \
 		--network "{{ .Network }}" \
 		--subnet "{{ .Subnet }}"
 	"""##
@@ -115,6 +122,21 @@ import(
 		--account {{ .Account }} \
 		--project {{ .Project }} \
 		ssh {{ .fullname }} \
+		--zone {{ .Zone }}
+	"""##
+}
+
+// scp with the vm
+#GCP_Copk: {
+	Config: #GCP_Config
+
+	Script: template.Execute(Template, Config)
+
+	Template: ##"""
+	gcloud compute \
+		--account {{ .Account }} \
+		--project {{ .Project }} \
+		scp \
 		--zone {{ .Zone }}
 	"""##
 }

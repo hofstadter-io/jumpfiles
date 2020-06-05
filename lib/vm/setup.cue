@@ -19,6 +19,7 @@ import "strings"
 	Packages: [
 		"ansible",
 		"git",
+		"tmux",
 		"tree",
 		"unzip",
 		"vim",
@@ -29,10 +30,10 @@ import "strings"
 	]
 
 	Versions: {
-		k8s: "1.16.8"
+		k8s: "1.18.2"
 		go: "1.14.3"
 		cue: "0.2.0"
-		hof: "0.5.5"
+		hof: "0.5.6"
 		mkcert: "1.4.1"
 		helm: "3.2.1"
 		Kind: "0.8.1"

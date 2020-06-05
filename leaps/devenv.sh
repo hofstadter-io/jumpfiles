@@ -49,6 +49,16 @@ function devenv () {
     popd > /devnull
     ;;
 
+  copy | scp )
+    # TODO, need to split all args by -- so we can supply the post-set to scp (what do we want to copy?)
+    # This one is special because we need interactive input
+    pushd $DEVENV_BASE > /devnull
+    CMD=$(cue cmd $@ copy | tr -d "\\")
+    echo $CMD
+    $CMD
+    popd > /devnull
+    ;;
+
   creds )
     devenv_jump cue cmd $@ creds
     ;;
