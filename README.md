@@ -1,7 +1,7 @@
 # jumpfiles - get more done in fewer keystrokes
 
 [![Version](https://img.shields.io/github/v/tag/hofstadter-io/jumpfiles)](https://github.com/hofstadter-io/jumpfiles/tags)
-[![Bounties](https://img.shields.io/github/issues/hofstadter-io/jumpfiles/bounty)]](https://github.com/hofstadter-io/jumpfiles/issues?q=is%3Aissue+is%3Aopen+label%3Abounty)
+[![Bounties](https://img.shields.io/github/issues/hofstadter-io/jumpfiles/bounty)](https://github.com/hofstadter-io/jumpfiles/issues?q=is%3Aissue+is%3Aopen+label%3Abounty)
 [![Gitter](https://img.shields.io/gitter/room/hofstadter/hof)](https://gitter.im/hofstadter-io)
 
 Jumpfiles are a set of Bash and Cue files loaded into your shell.
