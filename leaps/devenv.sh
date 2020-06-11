@@ -90,7 +90,7 @@ function devenv () {
     echo "unknown jump '$1'"
     echo "use: 'devenv ?' for help"
     echo "or:  'devenv E' to edit"
-    echo "and: 'devenv R' to reolaod"
+    echo "and: 'devenv R' to reload"
     ;;
   esac
 }

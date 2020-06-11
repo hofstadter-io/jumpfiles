@@ -7,7 +7,7 @@ USAGE () {
     echo "unknown jump '$1'"
     echo "use: 'a ?' for help"
     echo "or:  'a E' to edit"
-    echo "and: 'a R' to reolaod"
+    echo "and: 'a R' to reload"
 }
 
 # For using when launching gcloud web console in chrome

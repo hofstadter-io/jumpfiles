@@ -31,7 +31,7 @@ function c () {
     echo "unknown jump '$1'"
     echo "use: 'c ?' for help"
     echo "or:  'c E' to edit"
-    echo "and: 'c R' to reolaod"
+    echo "and: 'c R' to reload"
     ;;
   esac
 }

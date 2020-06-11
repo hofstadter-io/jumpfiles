@@ -70,7 +70,7 @@ function h_orig () {
     echo "unknown jump '$1'"
     echo "use: 'h ?' for help"
     echo "or:  'h E' to edit"
-    echo "and: 'h R' to reolaod"
+    echo "and: 'h R' to reload"
     ;;
   esac
 
