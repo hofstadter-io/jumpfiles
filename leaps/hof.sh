@@ -170,16 +170,16 @@ EOF
 }
 export -f _ℵ
 
-alias _Hv="pushd $HOFBASE/hof; hof mod vendor; popd"
-alias _Hg="pushd $HOFBASE/hof; hof gen; popd"
-alias _Hb="pushd $HOFBASE/hof/cmd/hof; go build; popd"
-alias _Hi="pushd $HOFBASE/hof/cmd/hof; go install; popd"
+alias _Hv="pushd $HOFBASE/hof > /dev/null; hof mod vendor; popd > /dev/null"
+alias _Hg="pushd $HOFBASE/hof > /dev/null; hof gen; popd > /dev/null"
+alias _Hb="pushd $HOFBASE/hof/cmd/hof > /dev/null; go build; popd > /dev/null"
+alias _Hi="pushd $HOFBASE/hof/cmd/hof > /dev/null; go install; popd > /dev/null"
 alias _HG="_Hv && _Hg"
 alias _Hr="_Hg && _Hb"
 alias _HR="_Hg && _Hi"
 alias _HB="_Hv && _Hg && _Hb"
 alias _HI="_Hv && _Hg && _Hi"
-alias _H="pushd $HOFBASE/hof; hof mod vendor && hof gen && _Hi; popd"
+alias _H="pushd $HOFBASE/hof > /dev/null; hof mod vendor && hof gen && _Hi; popd > /dev/null"
 
 # testing related
 alias _Hgt="go test"

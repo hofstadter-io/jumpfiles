@@ -57,3 +57,11 @@ function ping-godoc() {
 
     curl https://proxy.golang.org/${project}/@v/${version}.info
 }
+
+alias grep="egrep"
+
+function find-sed-replace () {
+    NAME=$1
+    PATTERN=$2
+    find . -type f -name "$NAME" -print0 | xargs -0 sed -i "$PATTERN"
+}

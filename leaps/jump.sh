@@ -34,6 +34,10 @@ function j_orig () {
   # jump to the source directory (repo root on your system)
   J | jump             ) cd $JDIR/.. ;;
 
+  # https://hackurls.com
+  news ) wget -O - hackurls.com/ascii | less ;;
+
+
   #
   #####  This is a starter template for other leap files, see them for examples of what to put here
   #
