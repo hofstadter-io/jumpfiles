@@ -21,6 +21,7 @@ function c () {
   t  | tmp          ) cd $CUEBASE/tmp  ;;
   C  | cmd          ) cd $CUEBASE/cue/cmd/cue ;;
   w  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
+  r  | repro        ) cd $CUEBASE/repro ;;
   ex | examples     ) cd $CUEBASE/examples  ;;
 
   v  | vim          ) cd $HOME/.EverVim/bundle/cue.vim  ;;

@@ -25,11 +25,12 @@ function h_orig () {
 
 
   # Documentation
-  d  | docs | site ) cd $HOME/hof/websites/site ;;
+  d  | docs | site ) cd $HOME/hof/websites/hof-docs ;;
   od | old-docs    ) cd $HOME/hof/websites/studios-docs ;;
 
-  # Other
-  yagu     ) cd $HOFBASE/yagu ;;
+  # Script
+  hls      ) cd $HOFBASE/hof/script ;;
+  hlst     ) cd $HOFBASE/hof/script/tests ;;
 
   # Hof Tool
   h  | hof    ) cd $HOFBASE/hof/$@ ;;

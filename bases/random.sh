@@ -29,10 +29,13 @@ alias X="xclip -sel clip"
 
 alias gt="gotestsum --format testname"
 
-alias v="nvim"
-alias n="nvim"
-alias code="nvim"
-alias edit="nvim"
+export ED=vim
+alias v="vim"
+alias n="vim"
+alias code="vim"
+alias edit="vim"
+
+alias uuid="cat /proc/sys/kernel/random/uuid"
 
 alias hugodev="hugo serve --bind 0.0.0.0 --buildDrafts --buildFuture"
 alias hugodraft="hugo serve --bind 0.0.0.0 --buildDrafts"

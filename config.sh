@@ -3,7 +3,7 @@
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Jumpfile editor
-JUMP_EDITOR=${ED:-nvim}
+JUMP_EDITOR=${ED:-vim}
 
 #
 ##### Common configs loaded by default (only when commands are run) (but does this persist after the command? (it should not))

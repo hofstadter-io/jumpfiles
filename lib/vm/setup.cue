@@ -31,9 +31,9 @@ import "strings"
 
 	Versions: {
 		k8s: "1.18.2"
-		go: "1.14.3"
+		go: "1.14.4"
 		cue: "0.2.0"
-		hof: "0.5.6"
+		hof: "0.5.9"
 		mkcert: "1.4.1"
 		helm: "3.2.1"
 		Kind: "0.8.1"
