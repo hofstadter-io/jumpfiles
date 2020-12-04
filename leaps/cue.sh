@@ -18,15 +18,20 @@ function c () {
   b  | base | home  ) cd $CUEBASE  ;;
   c  | cue          ) cd $CUEBASE/cue  ;;
   s  | src          ) cd $CUEBASE/cue  ;;
+  g  | gerrit       ) cd $CUEBASE/gerrit  ;;
   t  | tmp          ) cd $CUEBASE/tmp  ;;
   C  | cmd          ) cd $CUEBASE/cue/cmd/cue ;;
   w  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
+  d  | T | tut      ) cd $CUEBASE/cuetorials.com ;;
   r  | repro        ) cd $CUEBASE/repro ;;
   ex | examples     ) cd $CUEBASE/examples  ;;
 
   v  | vim          ) cd $HOME/.EverVim/bundle/cue.vim  ;;
   V  | VIM          ) cd $CUEBASE/cue.vim  ;;
   j  | jjo          ) cd $CUEBASE/jjo-vim-cue  ;;
+
+  aoc | code        ) cd $CUEBASE/cuetorials.com/code/advent-of-code/2020 ;;
+  AOC | content     ) cd $CUEBASE/cuetorials.com/content/advent-of-code ;;
 
   *) 
     echo "unknown jump '$1'"
@@ -36,3 +41,17 @@ function c () {
     ;;
   esac
 }
+
+function _Ci () {
+  pushd $CUEBASE/cue/cmd/cue >> /dev/null
+  go install
+  popd >> /dev/null
+}
+
+function _Cg () {
+  pushd $CUEBASE/gerrit/cmd/cue >> /dev/null
+  go install
+  popd >> /dev/null
+}
+
+alias dlvcue="dlv exec $(which cue)"
