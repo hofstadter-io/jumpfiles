@@ -13,21 +13,23 @@ function c () {
   "?" | help             ) cat $C_JUMP_FILE_LOCATION ;;
   E   | edit             ) $JUMP_EDITOR $C_JUMP_FILE_LOCATION ;;
   R   | RELOAD | reload  ) source $C_JUMP_FILE_LOCATION ;;
+  H   | home             ) cd $CUEBASE  ;;
 
   # cue source
-  b  | base | home  ) cd $CUEBASE  ;;
   c  | cue          ) cd $CUEBASE/cue  ;;
   s  | src          ) cd $CUEBASE/cue  ;;
   g  | gerrit       ) cd $CUEBASE/gerrit  ;;
+  h  | hof          ) cd $CUEBASE/hof-cue  ;;
   t  | tmp          ) cd $CUEBASE/tmp  ;;
   C  | cmd          ) cd $CUEBASE/cue/cmd/cue ;;
-  w  | web  | site  ) cd $CUEBASE/cuelang.org  ;;
-  d  | T | tut      ) cd $CUEBASE/cuetorials.com ;;
-  r  | repro        ) cd $CUEBASE/repro ;;
+  w  | web          ) cd $CUEBASE/cuelang.org  ;;
+  d  | site         ) cd $CUEBASE/cuetorials.com ;;
+  r  | repro        ) cd $CUEBASE/repro/$@ ;;
   ex | examples     ) cd $CUEBASE/examples  ;;
+	u  | utils        ) cd $CUEBASE/cuetils ;;
 
-  v  | vim          ) cd $HOME/.EverVim/bundle/cue.vim  ;;
-  V  | VIM          ) cd $CUEBASE/cue.vim  ;;
+
+  v  | lsp          ) cd $HOME/nvim/tree-sitter-cue  ;;
   j  | jjo          ) cd $CUEBASE/jjo-vim-cue  ;;
 
   aoc | code        ) cd $CUEBASE/cuetorials.com/code/advent-of-code/2020 ;;
@@ -42,6 +44,9 @@ function c () {
   esac
 }
 
+alias _c="cuetils" 
+alias _cf="cuetils flow" 
+
 function _Ci () {
   pushd $CUEBASE/cue/cmd/cue >> /dev/null
   go install
@@ -50,6 +55,18 @@ function _Ci () {
 
 function _Cg () {
   pushd $CUEBASE/gerrit/cmd/cue >> /dev/null
+  go install
+  popd >> /dev/null
+}
+
+function _Ch () {
+  pushd $CUEBASE/hof-cue/cmd/cue >> /dev/null
+  go install
+  popd >> /dev/null
+}
+
+function _CUi () {
+  pushd $CUEBASE/cuetils/cmd/cuetils >> /dev/null
   go install
   popd >> /dev/null
 }

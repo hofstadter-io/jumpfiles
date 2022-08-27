@@ -2,7 +2,6 @@ alias itsWhalesAllTheWayDown='docker run -v /var/run/docker.sock:/var/run/docker
 alias dNd='itsWhalesAllTheWayDown'
 
 alias dc="docker-compose"
-alias dm="docker-machine"
 
 alias dps="docker ps"
 alias dpsa="docker ps -a"

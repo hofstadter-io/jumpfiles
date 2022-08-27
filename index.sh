@@ -39,8 +39,6 @@ leaps=(
   # After account specific so we can setup some meta commands based on funcs defined there
   gcloud
 
-  # Developer ephemeral environments
-  devenv
 )
 
 for leap in ${leaps[@]}; do

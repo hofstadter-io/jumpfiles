@@ -1,6 +1,7 @@
 bins=(
-  hof
   kubectl
+  hof
+  cue
 )
 
 for b in ${bins[@]}; do
